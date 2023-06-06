@@ -1,0 +1,48 @@
+
+
+bcrypt.genSalt() // function which is used to generate salt
+
+Why we hash the password ?
+
+- When hacker get in out database we have to find a way to make it harder to him
+to have all users data, raw users data.
+
+So instead of storing password as it is, raw, it is smarter idea to hash it 
+so hacker would need some time to broke it or even find those unusable.
+
+
+hash(password); // aaa
+hash(salt + password) // bbb
+hash(salt + password) // ccc
+
+Salt is used because when we hash same password from different users he will
+look same:
+
+user1: {name:Alex,password:password123//hashed:aaaaaa}
+user2: {name:Milos,password:password123//hashed:aaaaaa}
+
+// So when hacker find the way to encrypt the Alex's password he will have
+access to the Milos.
+
+b.crypt.hash(password, number)
+
+
+With "salt round" they actually mean the cost factor.
+The cost factor controls how much time is needed to calculate a single BCrypt
+hash. 
+
+The higher the cost factor,the more hashing rounds are done.
+Increasing the cost factor by 1 doubles the necessary time. 
+
+The more time is necessary, the more difficult is brute-forcing.
+
+The salt is a random value, and should differ for each calculation, 
+so the result should hardly ever be the same,
+even for equal passwords.
+
+bcrypt.compare(dataToEncrypt, hashedPassword);
+
+// Izdvaja salt iz sifrovane lozinke, sifruje unetu i uporedjuje ih
+
+// Koristeci ovu komadu jos vise smo zasticeni jer izbegavamo da budemo zrtva
+Vremenskog napada (eng. Timming attack)
